@@ -1,0 +1,7 @@
+# Ignore SQLite database files
+./distributed-sqlite-poc
+./dsqlite-client
+./data/*
+*.db
+*.db-shm
+*.db-wal

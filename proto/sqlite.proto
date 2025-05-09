@@ -1,0 +1,60 @@
+// proto/sqlite.proto
+syntax = "proto3";
+
+package proto;
+option go_package = "./proto";
+
+enum ReadConsistency {
+  // Default unspecified, server can choose default (e.g., EVENTUAL)
+  READ_CONSISTENCY_UNSPECIFIED = 0;
+  // Eventually consistent reads (local node, potentially stale)
+  EVENTUAL = 1;
+  // Strongly consistent reads (linearizable, via leader)
+  STRONG = 2;
+}
+
+
+// Service for interacting with the distributed SQLite database
+service DistributedSqlite {
+  rpc ExecuteWrite(WriteRequest) returns (WriteResponse) {}
+  rpc ExecuteRead(ReadRequest) returns (ReadResponse) {}
+  rpc Join(JoinRequest) returns (JoinResponse) {}
+}
+
+message WriteRequest {
+  string sql = 1;
+}
+
+message WriteResponse {
+  bool success = 1;
+  string error = 2; 
+}
+
+message ReadRequest {
+  string sql = 1;
+  ReadConsistency consistency = 2;  
+}
+
+message Row {
+  repeated bytes values = 1; 
+}
+
+message QueryResult {
+  repeated string columns = 1;
+  repeated Row rows = 2;
+}
+
+message ReadResponse {
+  QueryResult result = 1;
+  string error = 2; 
+}
+
+message JoinRequest {
+  string node_id = 1;   
+  string raft_addr = 2; 
+}
+
+message JoinResponse {
+  bool success = 1;
+  string error = 2;
+}
