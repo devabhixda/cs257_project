@@ -138,6 +138,19 @@ Open a **4th terminal** in the project directory.
   ./dsqlite-client -addr localhost:50051 -sql "SELECT value FROM demo WHERE id = 2"
   ```
 
+## Team Contributions
+
+This project was a collaborative effort by Abhi Jain and Sai Prakash.
+
+-   **Abhi Jain:**
+    *   Focused on the implementation of the Raft consensus algorithm, ensuring node coordination and leader election.
+    *   Developed the server-side logic for handling client requests and replicating database commands across the cluster.
+    *   Contributed to the design and implementation of the gRPC services for inter-node communication and client-server interaction.
+-   **Sai Prakash:**
+    *   Developed the `dsqlite-client` command-line application for user interaction with the distributed database.
+    *   Implemented the SQLite integration, managing local database state and query execution on individual nodes.
+    *   Contributed to the overall system architecture, testing of distributed functionalities, and ensuring data consistency.
+
 ## Limitations & Disclaimer
 
 ⚠️ **This is strictly a Proof of Concept and NOT production-ready.** ⚠️
@@ -152,4 +165,4 @@ Open a **4th terminal** in the project directory.
 - **Observability:** Limited logging and no metrics.
 - **Cluster Management:** Basic join mechanism; no support for node removal, configuration changes, or more complex membership scenarios.
 
-Use this project for learning and experimentation purposes only.``
+Use this project for learning and experimentation purposes only.
